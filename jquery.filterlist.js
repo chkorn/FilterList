@@ -69,7 +69,6 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 						if (filteredList.length == 1) {
 							filteredList.first().removeClass('filterlist-active');
 						} else {
-							console.log(filteredList);
 							marked = $(filteredList.siblings(".filterlist-active").not('.filterlist-help')[0]);
 							marked.next(':not(.filterlist-help)').addClass('filterlist-active');
 							marked.removeClass('filterlist-active');
