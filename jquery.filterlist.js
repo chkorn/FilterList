@@ -97,7 +97,9 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 		// TODO
 		var defaults = {
 			'delay' : 100,
-			'help'	: true
+			'help'	: true,
+			'showdefault': true		// NYI!
+			'rank':true				// NYI!
 		};
 		var settings = $.extend(defaults, settings)
 		
