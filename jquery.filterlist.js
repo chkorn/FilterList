@@ -4,9 +4,24 @@ Show a small action menu when text is entered into a single HTML input (search) 
 Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
 */
 
-
 (function($){
 	$.fn.filterlist = function(settings) {
+		function appendHelp() {
+			helpElement = $("<li class='filterlist-help'>Available shortcuts</li>");
+			if (settings && settings.actions && settings.actions.length > 0) {
+				helpList = $("<ul></ul>");
+				helpElement.append(helpList);
+				$(settings.actions).each(function(id, opt) {
+					if (opt.test != null) {
+						helpList.append("<li>"+opt.test+": "+opt.title+"</li>")
+					} else {
+						helpList.append("<li>"+opt.title+"</li>")
+					}
+				});
+				baseList.append(helpElement);
+			}
+		}
+		
 		function evaluateActionList() {
 			if (inputElement.val().length == 0) {
 				baseList.remove();
@@ -22,42 +37,45 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 							baseList.append("<li>"+opt.title+"</li>")
 						}
 					});
+					if (settings.help) {
+						appendHelp();
+					}
 					inputElement.after(baseList);
-				} else {
-					baseList.html("");
-				}	
+				}
 			}
 		}
 		
 		function addListener() {
-			console.log("listener")
 			inputElement.keydown(function(e) {
-				// Bind keyboard navigation...	
-				if (e.keyCode == 38 && baseList.children('li').length > 0) {
-					if (baseList.children(".filterlist-active").length == 1) {
-						if (baseList.children().length == 1) {
-							$(baseList.children(":last-child")[0]).removeClass('filterlist-active');
+				// Bind keyboard navigation...
+				if (e.keyCode == 38) {
+					e.preventDefault();
+					filteredList = baseList.children().not('.filterlist-help');
+					if (filteredList.siblings(".filterlist-active").length == 1) {
+						if (filteredList.length == 1) {
+							filteredList.last().removeClass('filterlist-active');
 						} else {
-							marked = $(baseList.children(".filterlist-active")[0]);
+							marked = $(filteredList.siblings(".filterlist-active").not('.filterlist-help')[0]);
 							marked.prev().addClass('filterlist-active');
 							marked.removeClass('filterlist-active');
 						}
 					} else {
-						console.log("none selected");
-						$(baseList.children(":last-child")[0]).addClass('filterlist-active');
+						$(filteredList.last()).addClass('filterlist-active');
 					}
 				} else if (e.keyCode == 40) {
-					if (baseList.children(".filterlist-active").length == 1) {
-						if (baseList.children().length == 1) {
-							$(baseList.children(":first-child")[0]).removeClass('filterlist-active');
+					e.preventDefault();
+					filteredList = baseList.children().not('.filterlist-help');
+					if (filteredList.siblings(".filterlist-active").length == 1) {
+						if (filteredList.length == 1) {
+							filteredList.first().removeClass('filterlist-active');
 						} else {
-							marked = $(baseList.children(".filterlist-active")[0]);
-							marked.next().addClass('filterlist-active');
+							console.log(filteredList);
+							marked = $(filteredList.siblings(".filterlist-active").not('.filterlist-help')[0]);
+							marked.next(':not(.filterlist-help)').addClass('filterlist-active');
 							marked.removeClass('filterlist-active');
 						}
 					} else {
-						console.log("none selected");
-						$(baseList.children(":first-child")[0]).addClass('filterlist-active');
+						$(filteredList.first()).addClass('filterlist-active');
 					}
 				} else {
 					// Stop old timers on new keystroke...
@@ -80,6 +98,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 		// TODO
 		var defaults = {
 			'delay' : 100,
+			'help'	: true
 		};
 		var settings = $.extend(defaults, settings)
 		

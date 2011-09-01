@@ -1,0 +1,33 @@
+body {
+	font-family: Helvetica, Arial;
+}
+#search {
+	width: 200px;
+}
+#filterlist {
+	border: 1px solid #eee;
+	position: absolute;
+}
+ul, li {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+li {
+	padding: 3px;
+}
+.filterlist-active {
+	background: #ccc;
+}
+ul > li.filterlist-help {
+	cursor: help;
+}
+ul > li > ul > li {
+	display: none;
+	padding-left: 8px;
+	font-size: 10px;
+}
+ul > li:hover > ul > li {
+	display: block;
+	cursor: help;
+}

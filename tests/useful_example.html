@@ -11,8 +11,14 @@
 					{'test':null, 
 					'title':'Search (default)', 
 					'action':'TODO'},
-					{'test':/^test/, 
-					'title':'Simple string match for everything that starts with "test"...', 
+					{'test':/^\d+/, 
+					'title':'Open Ticket', 
+					'action':'TODO'},
+					{'test':/^l$/, 
+					'title':'Log Ticket', 
+					'action':'TODO'},
+					{'test':/^(i )(\w+)/, 
+					'title':'Open Item', 
 					'action':'TODO'}
 				]
 			});
@@ -21,7 +27,8 @@
 	<link rel="stylesheet" type="text/css" href="tests.css">
 </head>
 <body>
-	<h1>Test Case 1...</h1>
+	<h1>Search</h1>
+	<p>Search for a ticket or perform a special action</p>
 	<form method="post" action="">
 		<input type="text" name="search" id="search"/>
 		<input type="submit" name="submit" id="submit"/>
