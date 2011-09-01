@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Filterlist | Simple test...</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="../jquery.filterlist.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#search').filterlist({
+				'actions':[
+					{'test':null, 
+					'title':'Search (default)', 
+					'action':'TODO'},
+					{'test':/^test/, 
+					'title':'Simple string match for everything that starts with "test"...', 
+					'action':'TODO'}
+				]
+			});
+		});
+	</script>
+	<style type="text/css">
+		#search {
+			width: 200px;
+		}
+		#filterlist {
+			border: 1px solid black;
+		}
+		.filterlist-active {
+			background: #ccc;
+		}
+	</style>
+</head>
+<body>
+	<h1>Test Case 1...</h1>
+	<form method="post" action="">
+		<input type="text" name="search" id="search"/>
+		<input type="submit" name="submit" id="submit"/>
+	</form>
+</body>
+</html>
