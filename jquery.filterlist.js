@@ -29,12 +29,26 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 				baseList.empty();
 				if (settings && settings.actions && settings.actions.length > 0) {
 					$(settings.actions).each(function(id, opt) {
+						op = $("<li id='filter-action-"+id+"'>"+opt.title+"</li>");
+						op.hover(
+							function() {
+								$(this).addClass('filterlist-active');
+							},
+							function() {
+								$(this).removeClass('filterlist-active');
+							}
+						);
+						op.click(function() {
+							triggerAction(id)
+						});
 						if (opt.test != null) {
 							if (inputElement.val().match(opt.test)) {
-								baseList.append("<li>"+opt.title+"</li>")
+								op.data('filterId', id);
+								baseList.append(op);
 							}
 						} else {
-							baseList.append("<li>"+opt.title+"</li>")
+							op.data('filterId', id);
+							baseList.append(op);
 						}
 					});
 					if (settings.help) {
@@ -45,13 +59,19 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 			}
 		}
 		
+		function triggerAction(filterId) {
+			if (settings.actions[filterId]) {
+				settings.actions[filterId].action(inputElement.val());
+			}
+		}
+		
 		function addListener() {
 			inputElement.keydown(function(e) {
 				// Bind keyboard navigation...
 				if (e.keyCode == 38) {
 					e.preventDefault();
 					filteredList = baseList.children().not('.filterlist-help');
-					if (filteredList.siblings(".filterlist-active").length == 1) {
+					if (filteredList.filter(".filterlist-active").length == 1) {
 						if (filteredList.length == 1) {
 							filteredList.last().removeClass('filterlist-active');
 						} else {
@@ -65,7 +85,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 				} else if (e.keyCode == 40) {
 					e.preventDefault();
 					filteredList = baseList.children().not('.filterlist-help');
-					if (filteredList.siblings(".filterlist-active").length == 1) {
+					if (filteredList.filter(".filterlist-active").length == 1) {
 						if (filteredList.length == 1) {
 							filteredList.first().removeClass('filterlist-active');
 						} else {
@@ -75,6 +95,15 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 						}
 					} else {
 						$(filteredList.first()).addClass('filterlist-active');
+					}
+				} else if (e.keyCode == 13) {
+					marked = baseList.children(".filterlist-active");
+					if (marked.length > 0) {
+						e.preventDefault();
+						filterId = $(marked[0]).data('filterId');
+						triggerAction(filterId);
+					} else {
+						e.preventDefault();
 					}
 				} else {
 					// Stop old timers on new keystroke...
@@ -98,8 +127,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 		var defaults = {
 			'delay' : 100,
 			'help'	: true,
-			'showdefault': true		// NYI!
-			'rank':true				// NYI!
+			'showdefault': true,	// NYI!
 		};
 		var settings = $.extend(defaults, settings)
 		

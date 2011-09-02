@@ -8,18 +8,18 @@
 		$(document).ready(function() {
 			$('#search').filterlist({
 				'actions':[
-					{'test':null, 
-					'title':'Search (default)', 
-					'action':'TODO'},
-					{'test':/^\d+/, 
+					{'test':/^\d+$/, 
 					'title':'Open Ticket', 
-					'action':'TODO'},
+					'action':function(val){window.location.href = "https://github.com/emposha/FilterList/pull/"+val;}},
 					{'test':/^l$/, 
 					'title':'Log Ticket', 
-					'action':'TODO'},
+					'action':function(val){window.location.href = "https://github.com/chkorn/FilterList/issues/new";}},
 					{'test':/^(i )(\w+)/, 
 					'title':'Open Item', 
-					'action':'TODO'}
+					'action':function(val){alert("Search...");}},
+					{'test':null, 
+					'title':'Search', 
+					'action':function(val){alert("You should trigger a search");}},
 				]
 			});
 		});
