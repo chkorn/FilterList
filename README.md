@@ -16,7 +16,7 @@ You should specify the actions from most specific to least specific to get the m
 	actions: [						// Actions to provide?
 		{'test':[Regex or Null], 
 		'title':'Text to display', 
-		'action':function()}		// Function to execute
+		'action':function(val)}		// Function to execute, the val parameter contains the input elements value
 	], 
 	delay: int, 					// Delay in milliseconds until the popup is shown.
 	help: bool,						// Display help at the end of the box? default: true 
