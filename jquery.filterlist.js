@@ -7,7 +7,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 (function($){
 	$.fn.filterlist = function(settings) {
 		function appendHelp() {
-			helpElement = $("<li class='filterlist-help'>Available shortcuts</li>");
+			helpElement = $("<li class='filterlist-help'>"+settings.strings.help+"</li>");
 			if (settings && settings.actions && settings.actions.length > 0) {
 				helpList = $("<ul></ul>");
 				helpElement.append(helpList);
@@ -17,7 +17,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 					} else if (opt.test != null) {
 						helpList.append("<li>"+opt.test+": "+opt.title+"</li>")
 					} else {
-						helpList.append("<li>Always available: "+opt.title+"</li>")
+						helpList.append("<li>"+settings.strings.default+opt.title+"</li>")
 					}
 				});
 				baseList.append(helpElement);
@@ -130,7 +130,12 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 			'delay' : 100,
 			'help'	: true,
 			'showdefault': true,	// NYI!
+			'strings': {
+				'default':'Always available: ', 
+				'help':'Available shortcuts',
+			}
 		};
+		
 		var settings = $.extend(defaults, settings)
 		
 		var inputElement = $(this);
