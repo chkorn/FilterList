@@ -1,7 +1,7 @@
 # FilterList
 jQuery Plugin for search boxes to provide special actions. These actions are either shown when a regular expression matches, or always. 
 
-**If only one action is specified this is the default action**
+You should specify the actions from most specific to least specific to get the most relevant actions on top.
 
 ## Requirements
 * jQuery (http:/www.jquery.com)
@@ -16,9 +16,9 @@ jQuery Plugin for search boxes to provide special actions. These actions are eit
 	actions: [						// Actions to provide?
 		{'test':[Regex or Null], 
 		'title':'Text to display', 
-		'action':'NYI'}
+		'action':function()}		// Function to execute
 	], 
 	delay: int, 					// Delay in milliseconds until the popup is shown.
 	help: bool,						// Display help at the end of the box? default: true 
 	showdefault: bool,				// Display the default action? default: true (NYI)
-	rank: bool,						// Display the best filter match on top? default: true (NYI)
+
