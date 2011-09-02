@@ -31,7 +31,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 				baseList.empty();
 				if (settings && settings.actions && settings.actions.length > 0) {
 					$(settings.actions).each(function(id, opt) {
-						op = $("<li id='filter-action-"+id+"'>"+opt.title+"</li>");
+						op = $("<li id='filter-action-"+id+"'>"+format(opt.title, inputElement.val())+"</li>");
 						op.hover(
 							function() {
 								$(this).addClass('filterlist-active');
@@ -66,6 +66,12 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 				settings.actions[filterId].action(inputElement.val());
 			}
 		}
+		
+		function format(string, value) {
+			var regexp = new RegExp('\\{0\\}', 'gi');
+			formatted = string.replace(regexp, value);
+			return formatted;
+		};
 		
 		function addListener() {
 			inputElement.keydown(function(e) {

@@ -15,7 +15,7 @@ You should specify the actions from most specific to least specific to get the m
 # Options
 	actions: [						// Actions to provide?
 		{'test':[Regex or Null], 
-		'title':'Text to display',
+		'title':'Text to display',	// You use {0} to display the current search string.
 		'help':'Help text',			// This setting is optional. If specified it is displayed instead of the test Regex. 
 		'action':function(val)}		// Function to execute, the val parameter contains the input elements value
 	], 
