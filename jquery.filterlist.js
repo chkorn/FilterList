@@ -30,8 +30,9 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 			} else {
 				baseList.empty();
 				if (settings && settings.actions && settings.actions.length > 0) {
+					hits = 0;
 					$(settings.actions).each(function(id, opt) {
-						op = $("<li id='filter-action-"+id+"'>"+format(opt.title, inputElement.val())+"</li>");
+						op = $("<li class='filterlist-item' id='filter-action-"+id+"'>"+format(opt.title, inputElement.val())+"</li>");
 						op.hover(
 							function() {
 								$(this).addClass('filterlist-active');
@@ -47,10 +48,21 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 							if (inputElement.val().match(opt.test)) {
 								op.data('filterId', id);
 								baseList.append(op);
+								hits++;
+								if (hits == 1) {
+									op.addClass('filterlist-default');
+									console.log(settings.strings.defaultaction);
+									op.html(op.html() + settings.strings.defaultaction);
+								}
 							}
 						} else {
 							op.data('filterId', id);
 							baseList.append(op);
+							hits++;
+							if (hits == 1) {
+								op.addClass('filterlist-default');
+								op.html(op.html() + settings.strings.defaultaction);
+							}
 						}
 					});
 					if (settings.help) {
@@ -139,6 +151,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 			'strings': {
 				'default':'Always available: ', 
 				'help':'Available shortcuts',
+				'defaultaction':' <em>(Standard)</em>'
 			}
 		};
 		

@@ -29,4 +29,5 @@ List of localizable strings with default values...
 
 	'default':'Always available: ', 
 	'help':'Available shortcuts',
+	'defaultaction':'<em>(Standard)</em>'
 
