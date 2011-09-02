@@ -10,9 +10,11 @@
 				'actions':[
 					{'test':/^\d+$/, 
 					'title':'Open Ticket', 
+					'help':'Number',
 					'action':function(val){window.location.href = "https://github.com/emposha/FilterList/pull/"+val;}},
 					{'test':/^l$/, 
 					'title':'Log Ticket', 
+					'help': 'l',
 					'action':function(val){window.location.href = "https://github.com/chkorn/FilterList/issues/new";}},
 					{'test':/^(i )(\w+)/, 
 					'title':'Open Item', 

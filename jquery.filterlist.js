@@ -12,10 +12,12 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 				helpList = $("<ul></ul>");
 				helpElement.append(helpList);
 				$(settings.actions).each(function(id, opt) {
-					if (opt.test != null) {
+					if (typeof(opt.help) != "undefined" && opt.help != null) {
+						helpList.append("<li>"+opt.help+": "+opt.title+"</li>")
+					} else if (opt.test != null) {
 						helpList.append("<li>"+opt.test+": "+opt.title+"</li>")
 					} else {
-						helpList.append("<li>"+opt.title+"</li>")
+						helpList.append("<li>Always available: "+opt.title+"</li>")
 					}
 				});
 				baseList.append(helpElement);
