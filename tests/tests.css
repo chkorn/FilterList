@@ -34,3 +34,7 @@ ul > li:hover > ul > li {
 	display: block;
 	cursor: help;
 }
+input {
+	border: 1px solid #eee;
+	padding: 3px;
+}
