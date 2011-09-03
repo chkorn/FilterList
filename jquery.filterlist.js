@@ -94,7 +94,6 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 			addListener();
 		}
 		
-		// TODO
 		var defaults = {
 			'delay' : 100,
 			'help'	: true,
