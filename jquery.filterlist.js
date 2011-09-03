@@ -117,14 +117,16 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 						$(filteredList.first()).addClass('filterlist-active');
 					}
 				} else if (e.keyCode == 13) {
+					e.preventDefault();
 					marked = baseList.children(".filterlist-active");
 					if (marked.length > 0) {
-						e.preventDefault();
+						// Execute selected action
 						filterId = $(marked[0]).data('filterId');
-						triggerAction(filterId);
 					} else {
-						e.preventDefault();
+						// Execute the first in list.
+						filterId = baseList.children().filter(':first').data('filterId');
 					}
+					triggerAction(filterId);
 				} else {
 					// Stop old timers on new keystroke...
 					if (typeof(delayTimer) != "undefined") {
@@ -146,7 +148,6 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 		var defaults = {
 			'delay' : 100,
 			'help'	: true,
-			'showdefault': true,	// NYI!
 			'strings': {
 				'default':'Always available: ', 
 				'help':'Available shortcuts',

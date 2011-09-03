@@ -21,7 +21,6 @@ You should specify the actions from most specific to least specific to get the m
 	], 
 	delay: int, 					// Delay in milliseconds until the popup is shown.
 	help: bool,						// Display help at the end of the box? default: true 
-	showdefault: bool,				// Display the default action? default: true (NYI)
 	strings: dict					// See "Localizable strings"
 
 ## Localizable strings
