@@ -19,6 +19,9 @@ li {
 .filterlist-active {
 	background: #ccc;
 }
+ul > li {
+	cursor: pointer;
+}
 ul > li.filterlist-help {
 	cursor: help;
 }
