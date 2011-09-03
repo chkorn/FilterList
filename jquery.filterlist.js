@@ -51,7 +51,6 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 								hits++;
 								if (hits == 1) {
 									op.addClass('filterlist-default');
-									console.log(settings.strings.defaultaction);
 									op.html(op.html() + settings.strings.defaultaction);
 								}
 							}
