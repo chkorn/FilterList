@@ -13,20 +13,22 @@ You should specify the actions from most specific to least specific to get the m
 			});
 			
 # Options
-	actions: [						// Actions to provide?
-		{'test':[Regex or Null], 
-		'title':'Text to display',	// You use {0} to display the current search string.
-		'help':'Help text',			// This setting is optional. If specified it is displayed instead of the test Regex. 
-		'action':function(val)}		// Function to execute, the val parameter contains the input elements value
+	actions: [							// Actions to provide?
+		{'test':[Regex or Null], 	
+		'title':'Text to display',		// You use {0} to display the current search string.
+		'help':'Help text',				// This setting is optional. If specified it is displayed instead of the test Regex. 
+		'action':function(item, val)}	// Function to execute, the item parameter contains the list-item, 
+										// the val parameter contains the input elements value
 	], 
-	delay: int, 					// Delay in milliseconds until the popup is shown.
-	help: bool,						// Display help at the end of the box? default: true 
-	strings: dict					// See "Localizable strings"
+	delay: int, 						// Delay in milliseconds until the popup is shown.
+	help: bool,							// Display help at the end of the box? default: true 
+	strings: dict						// See "Localizable strings"
+	markfrist: bool						// Automatically mark the first item in list?
 
 ## Localizable strings
 List of localizable strings with default values...
 
 	'default':'Always available: ', 
 	'help':'Available shortcuts',
-	'defaultaction':'<em>(Standard)</em>'
+	'defaultaction':''
 

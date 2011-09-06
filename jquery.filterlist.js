@@ -41,8 +41,8 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 								$(this).removeClass('filterlist-active');
 							}
 						);
-						op.click(function() {
-							triggerAction(id)
+						op.click(function(e) {
+							return triggerAction($(e.currentTarget), id);
 						});
 						if (opt.test != null) {
 							if (inputElement.val().match(opt.test)) {
@@ -70,12 +70,23 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 					inputElement.after(baseList);
 				}
 			}
+			// mark first
+			if (settings.markfirst) {
+				marked = baseList.children(".filterlist-active");
+				if (marked.length == 0) {
+					filteredList = baseList.children().not('.filterlist-help');
+					if (filteredList.length > 0) {
+						$(filteredList.first()).addClass('filterlist-active');
+					}
+				}
+			}
 		}
 		
-		function triggerAction(filterId) {
+		function triggerAction(item, filterId) {
 			if (settings.actions[filterId]) {
-				settings.actions[filterId].action(inputElement.val());
-			}
+				return settings.actions[filterId].action(item, inputElement.val());
+			} 
+			return true;
 		}
 		
 		function format(string, value) {
@@ -125,7 +136,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 						// Execute the first in list.
 						filterId = baseList.children().filter(':first').data('filterId');
 					}
-					triggerAction(filterId);
+					return triggerAction(baseList.children().filter(':first'), filterId);
 				} else {
 					// Stop old timers on new keystroke...
 					if (typeof(delayTimer) != "undefined") {
@@ -147,10 +158,11 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 		var defaults = {
 			'delay' : 100,
 			'help'	: true,
+			'markfirst':true,
 			'strings': {
 				'default':'Always available: ', 
 				'help':'Available shortcuts',
-				'defaultaction':' <em>(Standard)</em>'
+				'defaultaction':''
 			}
 		};
 		
