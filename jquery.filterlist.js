@@ -11,12 +11,13 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
             'help'    : true,
             'markfirst':true,
             'strings': {
-                '_default':'Always available: ',
+                'default_text':'Always available: ',
                 'help':'Available shortcuts',
-                'defaultaction':''
+                'default_action':''
             }
         };
         settings = $.extend(defaults, settings);
+        
         var delayTimer = null;
         var inputElement = $(this);
         var baseList = $("<ul id='filterlist'></ul>");
@@ -41,7 +42,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
                     } else if (opt.test != null) {
                         helpList.append("<li>"+opt.test+": "+opt.title+"</li>");
                     } else {
-                        helpList.append("<li>"+settings.strings._default+opt.title+"</li>");
+                        helpList.append("<li>"+settings.strings.default_text+opt.title+"</li>");
                     }
                 });
                 baseList.append(helpElement);
@@ -68,13 +69,13 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
                             return triggerAction($(e.currentTarget), id);
                         });
                         if (opt.test != null) {
-                            if (inputElement.val().match(opt.test)) {
+                            if (inputElement.val().trim().match(opt.test)) {
                                 op.data('filterId', id);
                                 baseList.append(op);
                                 hits++;
                                 if (hits == 1) {
                                     op.addClass('filterlist-default');
-                                    op.html(op.html() + settings.strings.defaultaction);
+                                    op.html(op.html() + settings.strings.default_action);
                                 }
                             }
                         } else {
@@ -83,7 +84,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
                             hits++;
                             if (hits == 1) {
                                 op.addClass('filterlist-default');
-                                op.html(op.html() + settings.strings.defaultaction);
+                                op.html(op.html() + settings.strings.default_action);
                             }
                         }
                     });
