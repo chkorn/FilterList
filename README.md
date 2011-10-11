@@ -28,7 +28,7 @@ You should specify the actions from most specific to least specific to get the m
 ## Localizable strings
 List of localizable strings with default values...
 
-	'default':'Always available: ', 
+	'default_text':'Always available: ', 
 	'help':'Available shortcuts',
-	'defaultaction':''
+	'default_action':''
 
