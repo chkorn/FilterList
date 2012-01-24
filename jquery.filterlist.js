@@ -3,7 +3,6 @@ Show a small action menu when text is entered into a single HTML input (search) 
 
 Released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
 */
-/*jslint devel: true, browser: true, sloppy: true, eqeq: true, vars: true, white: true, nomen: true, plusplus: true, maxerr: 50, indent: 4 */
 (function ($){
     $.fn.filterlist = function(settings) {
         var defaults = {
@@ -107,7 +106,6 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
         }
         function addListener() {
             inputElement.keydown(function(e) {
-                // if (window.console) { console.log("hallo, hier ist die box, key ist: " + e.keyCode + " in event " + e); }
                 // Bind keyboard navigation...
                 var filteredList = [], marked = null;
                 if (e.keyCode == 38) {
@@ -145,15 +143,12 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
                     marked = baseList.children(".filterlist-active");
                     var filterId = null;
                     if (marked.length > 0) {
-                        // console.log("selected");
                         // Execute selected action
                         filterId = $(marked[0]).data('filterId');
                     } else {
-                        // console.log("default");
                         // Execute the first in list.
                         filterId = baseList.children().filter(':first').data('filterId');
                     }
-                    // if (window.console) { console.log("filterId:"+filterId); }
                     triggerAction(baseList.children().filter(':first'), filterId); // return...?
                     return false;
                 } else {
@@ -161,11 +156,21 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
                     if (delayTimer) {
                         clearTimeout(delayTimer);
                     }
-                    delayTimer = setTimeout( function() {
+                    delayTimer = setTimeout(function() {
                         evaluateActionList();
                     }, settings.delay);
                     return true;
                 }
+            });
+            // Also handle pasting...
+            inputElement.bind('paste change', function(e) {
+            	if (delayTimer) {
+                    clearTimeout(delayTimer);
+                }
+                delayTimer = setTimeout(function() {
+                    evaluateActionList();
+                }, settings.delay);
+                return true;
             });
         }
         function init() {
